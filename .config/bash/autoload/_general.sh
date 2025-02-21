@@ -1,5 +1,9 @@
 bind Space:magic-space
 
+function dot-reload() {
+    source ~/.bashrc
+}
+
 export HISTSIZE=10000
 export HISTTIMEFORMAT='%h %d %H:%M:%S '
 export HISTCONTROL=ignoreboth
