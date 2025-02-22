@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR="$HOME/.config/bash/autoload"
-HOSTNAME=$(hostname)
+HOSTNAME_S=$(hostname -s)
 
 source $HOME/.config/bash/scripts/utilities.sh
 
@@ -19,7 +19,7 @@ for file in "$SCRIPT_DIR"/*.sh; do
         file_hostname="${BASH_REMATCH[2]}"
 
         # Only source if the hostname matches
-        if [[ "$file_hostname" == "$HOSTNAME" ]]; then
+        if [[ "$file_hostname" == "$HOSTNAME_S" ]]; then
             debug_dotfiles "Sourcing host-specific script: $file"
             source "$file"
         else
