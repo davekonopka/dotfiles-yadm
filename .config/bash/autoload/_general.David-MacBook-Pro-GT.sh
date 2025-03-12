@@ -11,4 +11,13 @@ export RUBY_CONFIGURE_OPTS="--disable-install-doc --with-openssl-dir=$(brew --pr
 
 export GPG_TTY=$(tty)
 
-export TERRAGRUNT_LOG_DISABLE=true
+# Add to your profile
+export TENV_GITHUB_TOKEN=`op item get 'TENV Github Token' --field 'password' --vault 'Platform Team' --reveal`
+
+# If you want auto install versions
+export TENV_AUTO_INSTALL=true
+export TG_TF_PATH=terraform
+
+# This gets rid of the Terraform version prefixing
+export TG_TF_FORWARD_STDOUT=true
+#export TERRAGRUNT_LOG_DISABLE=true
