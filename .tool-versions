@@ -5,3 +5,5 @@ uv 0.5.11
 yadm 3.3.0
 helm 3.14.4
 terraform 1.9.5
+krew 0.4.4
+terragrunt 0.69.9
