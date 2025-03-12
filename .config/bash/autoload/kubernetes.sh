@@ -1,5 +1,8 @@
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+function ky() {
+  kubectl "$@" -o yaml | yq -C
+}
 
 function kkpods() {
   echo -e "POD\tNODE\tPOOL";
