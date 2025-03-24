@@ -29,6 +29,7 @@ function kube_shell() {
 
 
 alias k='kubectl'
+alias kc='kconf'
 alias kd='kubectl describe'
 alias kdel='kubectl delete'
 alias kg='kubectl get'
