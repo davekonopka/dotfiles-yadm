@@ -7,7 +7,7 @@ function dot-reload() {
 export HISTSIZE=10000
 export HISTTIMEFORMAT='%h %d %H:%M:%S '
 export HISTCONTROL=ignoreboth
-export PROMPT_COMMAND="${PROMPT_COMMAND} history -a;"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export EDITOR="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
 
