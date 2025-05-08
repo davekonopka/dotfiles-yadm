@@ -11,7 +11,8 @@ export RUBY_CONFIGURE_OPTS="--disable-install-doc --with-openssl-dir=$(brew --pr
 
 export GPG_TTY=$(tty)
 
-# Add to your profile
+export OPENAI_API_KEY=`op item get 'OpenAI CLI Key' --field 'password' --vault 'Employee' --reveal`
+
 export TENV_GITHUB_TOKEN=`op item get 'TENV Github Token' --field 'password' --vault 'Platform Team' --reveal`
 
 # If you want auto install versions
