@@ -22,3 +22,6 @@ export TG_TF_PATH=terraform
 # This gets rid of the Terraform version prefixing
 export TG_TF_FORWARD_STDOUT=true
 #export TERRAGRUNT_LOG_DISABLE=true
+
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
+export PATH=$(tenv update-path)
