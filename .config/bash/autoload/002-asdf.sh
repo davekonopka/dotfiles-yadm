@@ -1,4 +1,5 @@
 export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 function asdf-install() {
   # Check if an argument was provided
@@ -11,3 +12,4 @@ function asdf-install() {
   local plugin="$1"
   asdf install $plugin $(asdf list all $plugin | grep "^$version[^-]*$" | tail -1)
 }
+
