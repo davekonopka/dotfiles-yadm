@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SCRIPT_DIR="$HOME/.config/bash/autoload"
 HOSTNAME_S=$(hostname -s)
