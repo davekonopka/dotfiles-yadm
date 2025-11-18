@@ -1,4 +1,5 @@
 export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 function asdf-install() {
   # Check if an argument was provided
