@@ -27,6 +27,10 @@ function kube_shell() {
   kubectl run -it --rm --restart=Never $ns --image=bradbeam/utility:latest kube-shell-dk
 }
 
+if command -v kconf >/dev/null 2>&1; then
+  source <(kconf completion bash)
+  complete -o default -F __start_kconf kc
+fi
 
 alias k='kubectl'
 alias kc='kconf'
