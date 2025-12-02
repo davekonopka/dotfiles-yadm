@@ -11,9 +11,13 @@ export RUBY_CONFIGURE_OPTS="--disable-install-doc --with-openssl-dir=$(brew --pr
 
 export GPG_TTY=$(tty)
 
-export OPENAI_API_KEY=`op item get 'OpenAI CLI Key' --field 'password' --vault 'Employee' --reveal`
-
-export TENV_GITHUB_TOKEN=`op item get 'TENV Github Token' --field 'password' --vault 'Platform Team' --reveal`
+op-load-secrets() {
+  # Skip 1Password in VSCode, Cursor, etc.
+  #[[ "$TERM_PROGRAM" =~ "vscode" ]] && return
+  export OPENAI_API_KEY=`op item get 'OpenAI CLI Key' --field 'password' --vault 'Employee' --reveal`
+  export TENV_GITHUB_TOKEN=`op item get 'TENV Github Token' --field 'password' --vault 'Platform Team' --reveal`
+}
+#op-load-secrets
 
 # If you want auto install versions
 export TENV_AUTO_INSTALL=true
