@@ -21,6 +21,6 @@ istioctl 1.27.1
 loki-logcli 3.5.5
 nova 3.11.8
 ruby 3.4.6
-scaffold 0.10.3
+scaffold 0.12.0
 sops 3.11.0
 yarn 1.22.22
