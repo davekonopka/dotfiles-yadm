@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+
 SCRIPT_DIR="$HOME/.config/bash/autoload"
 HOSTNAME_S=$(hostname -s)
 
