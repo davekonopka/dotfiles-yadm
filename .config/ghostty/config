@@ -1,0 +1,10 @@
+theme=Catppuccin Frappe
+window-height=30
+window-width=100
+
+font-family="MonoLisa Variable"
+font-size=20
+font-feature=-liga
+font-thicken=true
+
+command="~/.config/bash/scripts/ghostty.sh"

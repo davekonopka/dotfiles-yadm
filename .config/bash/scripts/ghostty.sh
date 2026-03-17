@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# ensure Homebrew / common bin dirs are on PATH for non-interactive login shells
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+
 SESSION_NAME="ghostty"
 
 # Check if the session already exists
