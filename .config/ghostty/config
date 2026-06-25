@@ -1,10 +1,15 @@
-theme=Catppuccin Frappe
-window-height=30
-window-width=100
+theme = "Catppuccin Frappe"
+window-height = 30
+window-width = 100
 
-font-family="MonoLisa Variable"
-font-size=20
-font-feature=-liga
-font-thicken=true
+font-family = ""
+font-family = "RobotoMono Nerd Font Mono"
+font-size = 20
+font-feature = "-liga"
+font-thicken = "true"
 
-command="~/.config/bash/scripts/ghostty.sh"
+background-opacity = .9
+
+shell-integration-features = no-title
+
+command = "~/.config/bash/scripts/tmux-launch.sh ghostty"
