@@ -1,6 +1,6 @@
 golang 1.25.1
 kconf 2.0.0
-python 3.12.7
+python 3.14.3
 uv 0.8.22
 yadm 3.5.0
 helm 3.19.0
@@ -24,3 +24,4 @@ ruby 3.4.6
 scaffold 0.12.0
 sops 3.11.0
 yarn 1.22.22
+temporal 1.7.1
