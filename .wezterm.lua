@@ -8,17 +8,17 @@ local config = {
   set_environment_variables = {
     PATH = "/opt/homebrew/bin:" .. os.getenv("PATH")
   },
-  default_prog = { "bash", "-c", "tmux a || tmux" },
+  default_prog = { "bash", "-c", "~/.config/bash/scripts/tmux-launch.sh wezterm" },
   color_scheme = "Catppuccin Mocha",
-  font = wezterm.font 'RobotoMono Nerd Font Mono',
-  font_size = 18.0,
+  font = wezterm.font 'RobotoMono Nerd Font',
+  font_size = 20.0,
   initial_rows = 50,
   initial_cols = 170,
-  line_height = 1.0,
+  line_height = 1,
   window_background_opacity = 0.9,
   window_frame = {
-    font = wezterm.font('RobotoMono Nerd Font Mono', { bold = true }),
-    font_size = 14,
+    font = wezterm.font('RobotoMono Nerd Font', { bold = true }),
+    font_size = 18,
   },
   enable_tab_bar = true,
   hide_tab_bar_if_only_one_tab = true,
@@ -58,6 +58,7 @@ local process_icons = {
   ["ruby"] = wezterm.nerdfonts.cod_ruby,
   ["stern"] = wezterm.nerdfonts.linux_docker,
   ["sudo"] = wezterm.nerdfonts.fa_hashtag,
+  ["tmux"] = wezterm.nerdfonts.cod_terminal_tmux,
   ["usql"] = "󱤢",
   ["vim"] = wezterm.nerdfonts.dev_vim,
   ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
@@ -66,17 +67,23 @@ local process_icons = {
 
 -- Return the Tab's current working directory
 local function get_cwd(tab)
+  if not tab.active_pane or not tab.active_pane.current_working_dir then return "" end
   return tab.active_pane.current_working_dir.file_path or ""
 end
 
 -- Remove all path components and return only the last value
-local function remove_abs_path(path) return path:gsub("(.*[/\\])(.*)", "%2") end
+local function remove_abs_path(path)
+  path = path:gsub("/$", "")  -- strip trailing slash
+  return path:gsub("(.*[/\\])(.*)", "%2")
+end
 
 -- Return the pretty path of the tab's current working directory
 local function get_display_cwd(tab)
   local current_dir = get_cwd(tab)
-  local HOME_DIR = string.format("file://%s", os.getenv("HOME"))
-  return current_dir == HOME_DIR and "~/" or remove_abs_path(current_dir)
+  if current_dir == "" then return "?" end
+  local HOME_DIR = os.getenv("HOME")
+  local normalized = current_dir:gsub("/$", "")
+  return normalized == HOME_DIR and "~" or remove_abs_path(current_dir)
 end
 
 -- Return the concise name or icon of the running process for display
@@ -97,20 +104,20 @@ function format_title(tab)
 end
 
 
-wezterm.on(
-  'format-tab-title',
-  function(tab, tabs, panes, config, hover, max_width)
-    local title = format_title(tab)
-    if tab.is_active then
-      return {
-        { Background = { Color = '#B4E380' } },
-        { Foreground = { Color = '#173B45' } },
-        { Text = title },
-      }
-    end
-    return title
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  local pane = tab.active_pane
+  local title = pane.title  -- tmux sets this to the session name + window
+  local process = get_process(tab)
+
+  if tab.is_active then
+    return {
+      { Background = { Color = '#B4E380' } },
+      { Foreground = { Color = '#173B45' } },
+      { Text = string.format("  %s %s ", title, process) },
+    }
   end
-)
+  return string.format("  %s %s  ", title, process)
+end)
 
 -- and finally, return the configuration to wezterm
 return config
