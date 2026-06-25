@@ -16,4 +16,5 @@ alias ll="ls -la"
 alias lt="ls -latr"
 alias hg='history | grep '
 alias vim="nvim"
-alias code="code-insiders"
+
+code() { command code-insiders "$@"; }
