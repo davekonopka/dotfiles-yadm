@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
+# Set path for tmux install
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+
+# libtmux required by ofirgall/tmux-window-name
+if ! python3 -c 'import libtmux' 2>/dev/null; then
+  python3 -m pip install --break-system-packages libtmux
+fi
 
 SOURCE="${1:?Usage: $0 <source-name>}"
 
