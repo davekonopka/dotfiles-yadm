@@ -31,8 +31,8 @@ export PATH=$(tenv update-path)
 
 pull-claude-mds() {
     local repo="$HOME/Projects/claude/claude-mds"
-
-    git -C "$repo" pull --ff-only --prune
+    [[ -d "$repo/.git" ]] || return 0
+    git -C "$repo" pull --ff-only --prune --quiet
 }
 
 claude-gt() {
@@ -84,5 +84,4 @@ codex-gt-refresh-agents () {
     } > "$HOME/.codex/AGENTS.md"
 }
 
-pull-claude-mds
-codex-gt-refresh-agents
+( { pull-claude-mds; codex-gt-refresh-agents; } 2>"$HOME/.codex/gt-refresh.log" & )
