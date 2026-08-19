@@ -3,7 +3,6 @@
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 SCRIPT_DIR="$HOME/.config/bash/autoload"
-HOSTNAME_S=$(hostname -s)
 
 source $HOME/.config/bash/scripts/utilities.sh
 
@@ -13,23 +12,10 @@ if [[ ! -d "$SCRIPT_DIR" ]]; then
 fi
 
 for file in "$SCRIPT_DIR"/*.sh; do
-    filename=$(basename "$file" .sh)
+    # Skip yadm alternate/template sources (e.g. *.sh##class.work-gt); only
+    # the resolved symlink/rendered target should ever be sourced.
+    [[ "$file" == *'##'* ]] && continue
 
-    # Check if the filename contains a hostname suffix
-    if [[ "$filename" =~ ^([^.]*)\.(.+)$ ]]; then
-        base_name="${BASH_REMATCH[1]}"
-        file_hostname="${BASH_REMATCH[2]}"
-
-        # Only source if the hostname matches
-        if [[ "$file_hostname" == "$HOSTNAME_S" ]]; then
-            debug_dotfiles "Sourcing host-specific script: $file"
-            source "$file"
-        else
-            debug_dotfiles "Skipping script (wrong host): $file"
-        fi
-    else
-        # Source generic scripts
-        debug_dotfiles "Sourcing generic script: $file"
-        source "$file"
-    fi
+    debug_dotfiles "Sourcing script: $file"
+    source "$file"
 done
